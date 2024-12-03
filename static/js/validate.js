@@ -16,9 +16,12 @@ validatedFields.forEach(element => {
                     'X-CSRFToken':csrftoken,
                 }
             })
-            .then(response => {
-                if (!response.ok) {
-                    return Promise.reject(response)
+            .then(async response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    const data = await response.json();
+                    throw Error(data.error);
                 }
             })
             .catch(() => {
