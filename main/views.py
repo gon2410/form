@@ -14,7 +14,7 @@ invalid_characters = tuple(string.digits)
 #invalid_characters = tuple(string.punctuation + string.digits + "¨" + "´" + "`")
 
 def validate_input(request):
-    if request.method =="POST":
+    if request.method == "POST":
         input_data = json.loads(request.body)
         value = input_data["value"]
         if any((character in invalid_characters) for character in value):

@@ -17,7 +17,7 @@ validatedFields.forEach(element => {
                 }
             })
             .then((response) => {
-                return response.json()
+                response.json()
             })
             .then((data) => {
                 if (data.error) {
