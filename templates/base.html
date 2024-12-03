@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="icon" type="image/x-icon" href="/static/icon.png">
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap-5.3.0-dist/css/bootstrap.css">
+    <script src="/static/jquery/jquery-3.7.0.min.js"/></script>
+    <script src="/static/bootstrap/bootstrap-5.3.0-dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <main>
+        {% block content %}
+
+        {% endblock content %}
+
+        <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 bg-success">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-light" id="exampleModalLabel">Success &#128512;</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-light" id="successModalMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERROR MESSSAGE -->
+        <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 bg-danger">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-light" id="exampleModalLabel">Error &#9995;</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-light" id="errorModalMessage"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="text/javascript" src="{% static 'js/token.js' %}"></script>
+    {% block js %}
+
+    {% endblock js %}
+</body>
+</html>

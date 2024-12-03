@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Form{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5" style="max-width: 30rem;">
+        <form action="creategroup" method="post" id="form">
+            {% csrf_token %}
+            <input class="form-control" type="email" name="" id="email" placeholder="Direccion de email válida" required>
+
+            <div class="row mt-5">
+                <div class="col">
+                    <input class="form-control validate-input" type="text" name="first_name" id="first_name_one" placeholder="Nombre" required>
+                </div>
+
+                <div class="col">
+                    <input class="form-control validate-input" type="text" name="last_name" id="last_name_one" placeholder="Apellido" required>
+                </div>
+
+                <div class="col">
+                    <select class="form-select name" name="menu" id="menu_one" aria-label="Default select example" required>
+                        <option value="">Menú</option>
+                        <option value="sin_condicion">Sin Condicion</option>
+                        <option value="vegetariano">Vegetariano</option>
+                        <option value="vegano">Vegano</option>
+                        <option value="celiaco">Celiaco</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <a class="text-center text-dark" data-bs-toggle="collapse" href="#companionDropdown" role="button" aria-expanded="false" aria-controls="companionDropdown">
+                    agregar acompañantes
+                </a>
+            </div>
+
+            <div class="row collapse data mt-5" id="companionDropdown">
+                <div class="col">
+                    <input class="form-control validate-input" type="text" name="last_name" id="first_name_two" placeholder="Nombre">
+                </div>
+
+                <div class="col">
+                    <input class="form-control validate-input" type="text" name="last_name" id="last_name_two" placeholder="Apellido">
+                </div>
+
+                <div class="col">
+                    <select class="form-select name" name="menu" id="menu_two" aria-label="Default select example">
+                        <option value="">Menú</option>
+                        <option value="sin_condicion">Sin Condicion</option>
+                        <option value="vegetariano">Vegetariano</option>
+                        <option value="vegano">Vegano</option>
+                        <option value="celiaco">Celiaco</option>
+                    </select>
+                </div>
+
+                <p class="text-muted text-center mt-2">dejar en blanco si no corresponde</p>
+            </div>
+
+            <p class="text-muted text-center mt-5">Algo más para avisar? O agregar?</p>
+            <textarea class="form-control mt-1" name="note" id="note" placeholder="Escriba..." style="height: 10rem;"></textarea>
+
+            <input class="form-control btn btn-primary mt-5" type="submit" value="Confirmar" id="submit">
+        </form>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/validate.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/submit.js'%}"></script>
+{% endblock js %}

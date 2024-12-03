@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5" style="max-width: 40rem;">
+        <h1 class="text-center">Ingresar</h1>
+        <form action="login" method="post" id="loginForm">
+            {% csrf_token %}
+
+            <label for="username">Usuario</label>
+            <input class="form-control" type="text" name="username" id="usernameId" required>
+    
+            <label for="password">Contraseña</label>
+            <input class="form-control" type="password" name="password" id="passwordId" required>
+
+            <input class="form-control btn btn-success validate mt-5" type="submit" id="submitButton" value="Ingresar">
+        </form>
+    </div>
+
+
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="modalTitle">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 bg-danger">
+                <div class="modal-header">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">Error &#9995;</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-light" id="errorModalMessage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+        
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+{% endblock js %}
