@@ -16,16 +16,16 @@ validatedFields.forEach(element => {
                     'X-CSRFToken':csrftoken,
                 }
             })
-            .then(response => {
+            .then((response) => {
                 return response.json()
             })
-            .then(data => {
+            .then((data) => {
                 if (data.error) {
                     element.classList.add("is-invalid");
                     submitBtn.disabled = true;
                 }
             })
-            .catch(() => {
+            .catch((error) => {
                 console.log(error)
             })
         }
