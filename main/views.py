@@ -9,7 +9,9 @@ from django.core import serializers
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 
-invalid_characters = tuple(string.punctuation + string.digits + "¨" + "´" + "`")
+invalid_characters = tuple(string.digits)
+
+#invalid_characters = tuple(string.punctuation + string.digits + "¨" + "´" + "`")
 
 def validate_input(request):
     if request.method =="POST":
