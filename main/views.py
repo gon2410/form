@@ -15,12 +15,16 @@ invalid_characters = tuple(string.digits)
 
 def validate_input(request):
     if request.method == "POST":
-        input_data = json.loads(request.body)
-        value = input_data["value"]
-        if any((character in invalid_characters) for character in value):
-            return JsonResponse({"error": True}, status=400)
-        else:
-            return JsonResponse({"success": True}, status=200)
+        try:
+            input_data = json.loads(request.body)
+            value = input_data["value"]
+            if any((character in invalid_characters) for character in value):
+                return JsonResponse({"error": True}, status=400)
+            else:
+                return JsonResponse({"success": True}, status=200)
+        except Timeout:
+            return JsonResponse({"error": "La conexion no es muy buena. Intente mas tarde."}, status=504)
+        
 
 def render_index(request):
     if request.method == "GET":
@@ -29,12 +33,11 @@ def render_index(request):
 
 def create_group(request):
     if request.method == "POST":
-        print(request.POST)
-        invites = json.loads(request.POST["invites"])
-        mail = request.POST["mail"]
-        note = request.POST["note"]
-
         try:
+            print(request.POST)
+            invites = json.loads(request.POST["invites"])
+            mail = request.POST["mail"]
+            note = request.POST["note"]
             with transaction.atomic():
 
                 if Group.objects.filter(mail=mail).exists():
@@ -52,8 +55,7 @@ def create_group(request):
                     if len(first_name) != 0 and len(last_name) != 0:
                         invited = Invited.objects.create(first_name=first_name, last_name=last_name, menu=menu, group=group)
                         invited.save()
-            return JsonResponse({"success": "Asistencia confirmada."}, status=200)
-        
+            return JsonResponse({"success": f"Asistencia confirmada. Enviamos un email a {mail} con los detalles."}, status=200)
         except Timeout:
             return JsonResponse({"error": "La conexion no es muy buena. Intente mas tarde."}, status=504)
         except Exception as e:

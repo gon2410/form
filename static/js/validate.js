@@ -17,16 +17,15 @@ validatedFields.forEach(element => {
                 }
             })
             .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                if (data.error) {
-                    element.classList.add("is-invalid");
-                    submitBtn.disabled = true;
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    return Promise.reject(response)
                 }
             })
             .catch((error) => {
-                console.log(error)
+                element.classList.add("is-invalid");
+                submitBtn.disabled = true;
             })
         }
     })

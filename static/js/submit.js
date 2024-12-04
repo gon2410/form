@@ -78,14 +78,12 @@ form.addEventListener("submit", function(e){
             'X-CSRFToken': csrftoken,
         }
     })
-    .then(response => {
+    .then(async response => {
         if (response.ok) {
             return response.json();
         } else {
-            return response.json()
-            .then(data => {
-                throw Error(data.error)
-            })
+            const data = await response.json();
+            throw Error(data.error);
         }
     })
     .then(data => {
