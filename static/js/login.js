@@ -29,7 +29,7 @@ loginForm.addEventListener("submit", (e) => {
     .then(async response => {
         if (response.ok) {
             cleanUp();
-            window.location.href = "http://127.0.0.1:8000/administracion";
+            window.location.href = "https://web-production-ab65.up.railway.app/administracion";
             return response.json();
 
         } else {
