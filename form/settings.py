@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = ["https://web-production-ab65.up.railway.app/*"]
 
 ROOT_URLCONF = 'form.urls'
 
