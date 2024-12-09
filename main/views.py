@@ -66,22 +66,18 @@ def render_admin(request):
     if request.method == "GET":
         if request.user.is_authenticated:
             invites = Invited.objects.all()
-            groups = Group.objects.all().values()
             
+            total_groups = Group.objects.all().count()
             total = Invited.objects.all().count()
             sin_condicion = Invited.objects.filter(menu="sin_condicion").count()
             vegetariano = Invited.objects.filter(menu="vegetariano").count()
             vegano = Invited.objects.filter(menu="vegano").count()
             celiaco = Invited.objects.filter(menu="celiaco").count()
 
-            # for i in groups:
-            #     print(f"Grupo de {i["mail"]}")
-            #     print(Invited.objects.filter(group=i["id"]))
-
-            return render(request, "admin.html", {"invites":invites, "groups": groups,
-                                                  "total": total, "sin_condicion": sin_condicion,
+            return render(request, "admin.html", {"invites":invites, "total_groups": total_groups, "total": total,
+                                                  "sin_condicion": sin_condicion,
                                                   "vegetariano": vegetariano, "vegano": vegano,
-                                                  "celiaco": celiaco})
+                                                  "celiaco": celiaco, "groups": get_groups_data()})
         else:
             return redirect("/login")
 
@@ -146,3 +142,14 @@ def logout_admin(request):
     if request.method == "POST":
         logout(request)
         return redirect("/login")
+    
+def get_groups_data():
+    groups = Group.objects.all()
+    return groups
+        
+        # print(f"Grupo de {i["mail"]}")
+
+def get_group_data(request, group_id):
+    if request.method == "GET":
+        data = Invited.objects.filter(group=group_id).values()
+        return JsonResponse(list(data), safe=False, status=200)

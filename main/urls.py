@@ -9,6 +9,7 @@ urlpatterns = [
     path("creategroup", views.create_group),
     path("administracion", views.render_admin),
     path("get/<int:invited_id>", views.get_invite_data),
+    path("get/group/<int:group_id>", views.get_group_data),
     path("update", views.update_invite),
     path("delete/<int:invite_id>", views.delete_invite),
     path("login", views.Login.as_view()),
