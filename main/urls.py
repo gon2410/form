@@ -5,13 +5,15 @@ app_name = "main"
 
 urlpatterns = [
     path("", views.render_index),
-    path("validate", views.validate_input),
-    path("creategroup", views.create_group),
     path("administracion", views.render_admin),
-    path("get/<int:invited_id>", views.get_invite_data),
-    path("get/group/<int:group_id>", views.get_group_data),
-    path("update", views.update_invite),
-    path("delete/<int:invite_id>", views.delete_invite),
+    path("addgroup", views.add_group),
+    path("get/group/<int:group_id>", views.get_group),
+    path("get/<int:guest_id>", views.get_guest),
+    path("update", views.update_guest),
+    path("delete/group/<int:group_id>", views.delete_group),
+    path("delete/<int:guest_id>", views.delete_guest),
+    path("validate", views.validate_input),
+    path("download", views.download),
     path("login", views.Login.as_view()),
     path("logout", views.logout_admin),
 ]

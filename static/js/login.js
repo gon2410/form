@@ -30,6 +30,8 @@ loginForm.addEventListener("submit", (e) => {
         if (response.ok) {
             cleanUp();
             window.location.href = "https://web-production-ab65.up.railway.app/administracion";
+            //https://web-production-ab65.up.railway.app/administracion
+            //http://127.0.0.1:8000/administracion
         } else {
             const data = await response.json();
             throw Error(data.error);

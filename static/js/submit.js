@@ -47,31 +47,31 @@ form.addEventListener("submit", function(e){
     
     const formData = new FormData();
 
-    let first_invite = {
+    let first_guest = {
         firstname: firstNameOne.value,
         lastname: lastNameOne.value,
         menu: menuOne.value
     }
 
-    let second_invite = {
+    let second_guest = {
         firstname: firstNameTwo.value,
         lastname: lastNameTwo.value,
         menu: menuTwo.value
     }
 
-    let invites = {
-        first_invite: first_invite,
-        second_invite: second_invite
+    let guests = {
+        first_invite: first_guest,
+        second_invite: second_guest
     }
 
-    formData.append('invites', JSON.stringify(invites));
+    formData.append('guests', JSON.stringify(guests));
 
     formData.append('mail', email.value);
     formData.append('note', note.value);
     submitBtn.disabled = true;
     submitBtn.value = "Cargando..."
 
-    fetch("creategroup", {
+    fetch("addgroup", {
         method: 'POST',
         body: formData,
         headers: {
