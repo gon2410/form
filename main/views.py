@@ -1,7 +1,8 @@
+import datetime
 import json
 import string
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from requests.exceptions import Timeout
 from django.db import transaction
 from .models import Group, Invited
@@ -81,6 +82,7 @@ def render_admin(request):
         vegano = Invited.objects.filter(menu="vegano").count()
         celiaco = Invited.objects.filter(menu="celiaco").count()
 
+        download()
         return render(request, "admin.html", {"groups": groups, "guests":guests,
                                               "total_groups": total_groups, "total_guests": total_guests,
                                                 "sin_condicion": sin_condicion, "vegetariano": vegetariano,
@@ -108,17 +110,6 @@ def get_guest(request, guest_id):
         return JsonResponse({"data": serialized_guest_data}, safe=False, status=200)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=400)
-
-# @require_GET
-# def get_guest(request, guest_id):
-#     try:
-#         print(Invited.objects.select_related("group").get(id=guest_id))
-#         guest = Invited.objects.get(id=guest_id)
-#         guest_data = serializers.serialize("json", [guest])
-#         serialized_guest_data = json.loads(guest_data)
-#         return JsonResponse({"data": serialized_guest_data}, safe=False, status=200)
-#     except Exception as e:
-#         return JsonResponse({"error": str(e)}, status=400)
 
 @require_POST
 def update_guest(request):
@@ -196,11 +187,10 @@ def logout_admin(request):
     logout(request)
     return redirect("/login")
 
-@require_GET
-def download(request):
+def download():
     all_guests = Invited.objects.all().order_by("last_name")
 
-    canvas = Canvas("hello.pdf")
+    canvas = Canvas("./static/invitados.pdf")
     canvas.drawString(230, 700, "NOMBRE DEL EVENTO")
     canvas.drawString(100, 620, "Lista de invitados")
     canvas.drawString(100, 580, "#")
@@ -216,4 +206,3 @@ def download(request):
         space -= 25
         counter += 1
     canvas.save()
-    return redirect("/administracion")

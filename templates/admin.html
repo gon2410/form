@@ -33,7 +33,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <button class="btn btn-sm edit" name="{{ guest.id }}" title="Editar"  data-bs-toggle="modal" data-bs-target="#editModal">&#9997;</button>
-                                            <form action="delete/{{ invite.id }}" method="post">
+                                            <form action="delete/{{ guest.id }}" method="post">
                                                 {% csrf_token %}
                                                 <button class="btn btn-sm" type="submit" title="Eliminar" onclick="return confirmDelete();">&#128465;</button>
                                             </form>
@@ -139,9 +139,7 @@
                     en el momento de la descarga del archivo.
                 </p>
                 <div class="d-flex justify-content-center">
-                    <form action="download" method="get">
-                        <button class="btn btn-outline-danger m-1" type="submit">Descargar PDF</button>
-                    </form>
+                    <a class="btn btn-outline-danger" href="/static/invitados.pdf" download>Descargar PDF</a>
                 </div>
             </div>
         </div>
