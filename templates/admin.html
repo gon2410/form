@@ -3,7 +3,8 @@
 {% block title %}Admin{% endblock title %}
 
 {% block content %}
-    <div class="text-center">
+    <div class="text-center mt-5">
+        <h4>Administración</h4>
         <form action="logout" method="post">
             {% csrf_token %}
             <input class="btn btn-danger text-center" type="submit" value="Salir">
@@ -130,7 +131,7 @@
             </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-5 mb-5">
             <h5>Descargas</h5>
             <hr>
             <div class="container">

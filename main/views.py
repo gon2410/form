@@ -167,7 +167,10 @@ def delete_group(request, group_id):
 
 class Login(View):
     def get(self, request):
-        return render(request, "login.html")
+        if request.user.is_authenticated:
+            return redirect("/administracion")
+        else:
+            return render(request, "login.html")
 
     def post(self, request):
         username = request.POST["username"]
